@@ -1,0 +1,71 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: uv run src/preprocess.py
+    deps:
+    - path: data/house_prices.csv
+      hash: md5
+      md5: c6002511afd9ee16f3bb5d84c0c8b734
+      size: 377
+    - path: src/preprocess.py
+      hash: md5
+      md5: c86dfd10438fcc822877b6fd7f34fa41
+      size: 758
+    outs:
+    - path: data/X_test.csv
+      hash: md5
+      md5: aa0a319e75afac21c0f81ac7294d9d6a
+      size: 104
+    - path: data/X_train.csv
+      hash: md5
+      md5: ed5b091ac51264d761b569f833c301ad
+      size: 223
+    - path: data/y_test.csv
+      hash: md5
+      md5: e677c82d76fa68fac3b94d21fc584a0d
+      size: 35
+    - path: data/y_train.csv
+      hash: md5
+      md5: 4292ee81626a46be5d69515b41b1f3ed
+      size: 91
+  train:
+    cmd: uv run src/train.py --model A
+    deps:
+    - path: data/X_train.csv
+      hash: md5
+      md5: ed5b091ac51264d761b569f833c301ad
+      size: 223
+    - path: data/y_train.csv
+      hash: md5
+      md5: 4292ee81626a46be5d69515b41b1f3ed
+      size: 91
+    - path: src/train.py
+      hash: md5
+      md5: ea1b2bb8688bf1ec1ffbb2bb31979907
+      size: 1394
+    params:
+      params.yaml:
+        train.model: A
+    outs:
+    - path: models/model_A.joblib
+      hash: md5
+      md5: 5ecf60df82d3f6875aadf293e4cfa6a4
+      size: 959
+  evaluate:
+    cmd: uv run src/evaluate.py --model A
+    deps:
+    - path: data/X_test.csv
+      hash: md5
+      md5: aa0a319e75afac21c0f81ac7294d9d6a
+      size: 104
+    - path: data/y_test.csv
+      hash: md5
+      md5: e677c82d76fa68fac3b94d21fc584a0d
+      size: 35
+    - path: src/evaluate.py
+      hash: md5
+      md5: b2db76abe76f2ddbacaab67c998aa551
+      size: 782
+    params:
+      params.yaml:
+        evaluate.model: A

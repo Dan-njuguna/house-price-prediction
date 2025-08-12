@@ -1,0 +1,5 @@
+train:
+  model: A
+
+evaluate:
+  model: A

@@ -1,0 +1,30 @@
+stages:
+  preprocess:
+    cmd: uv run src/preprocess.py
+    deps:
+      - src/preprocess.py
+      - data/house_prices.csv
+    outs:
+      - data/X_test.csv
+      - data/X_train.csv
+      - data/y_test.csv
+      - data/y_train.csv
+  train:
+    cmd: uv run src/train.py --model ${train.model}
+    deps:
+      - src/train.py
+      - data/X_train.csv
+      - data/y_train.csv
+    outs:
+      - models/model_${train.model}.joblib
+    params:
+      - train.model
+
+  evaluate:
+    cmd: uv run src/evaluate.py --model ${evaluate.model}
+    deps:
+      - src/evaluate.py
+      - data/X_test.csv
+      - data/y_test.csv
+    params:
+      - evaluate.model
