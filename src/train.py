@@ -8,22 +8,22 @@ import joblib
 
 def train_model(model_type):
     # Load preprocessed data
-    X_train = pd.read_csv('X_train.csv')
-    y_train = pd.read_csv('y_train.csv')
+    X_train = pd.read_csv('data/X_train.csv')
+    y_train = pd.read_csv('data/y_train.csv')
 
     # Choose model
     if model_type == "A":
         model = LinearRegression()
-        model_name = "model_A.joblib"
+        model_name = "models/model_A.joblib"
     elif model_type == "B":
         model = RandomForestRegressor(n_estimators=100, random_state=42)
-        model_name = "model_B.joblib"
+        model_name = "models/model_B.joblib"
     elif model_type == "C":
         model = SVR()
-        model_name = "model_C.joblib"
+        model_name = "models/model_C.joblib"
     elif model_type == "D":
         model = KNeighborsRegressor(n_neighbors=5)
-        model_name = "model_D.joblib"
+        model_name = "models/model_D.joblib"
     else:
         raise ValueError("Invalid model type. Choose 'A', 'B', 'C' or 'D'.")
 

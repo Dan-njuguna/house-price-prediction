@@ -5,11 +5,11 @@ import joblib
 
 def evaluate_model(model_type):
     # Load preprocessed data
-    X_test = pd.read_csv('X_test.csv')
-    y_test = pd.read_csv('y_test.csv')
+    X_test = pd.read_csv('data/X_test.csv')
+    y_test = pd.read_csv('data/y_test.csv')
 
     # Load model
-    model_name = f"model_{model_type}.joblib"
+    model_name = f"models/model_{model_type}.joblib"
     model = joblib.load(model_name)
 
     # Predict and evaluate
