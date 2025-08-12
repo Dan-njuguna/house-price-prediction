@@ -1,4 +1,5 @@
 venv
+.venv
 X_test.csv
 X_train.csv
 y_test.csv
