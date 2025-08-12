@@ -11,7 +11,7 @@ This repository is meant to be cloned as part of the steps of following the rela
 
 The `circleci` branch has the CircleCI config included that aligns with the tutorial when completed.
 
-## Set up the virtual environment
+## 1.1 Set up the virtual environment
 
 ```bash
 # Create a virtual environment
@@ -24,10 +24,26 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
+## Set up the virtual env uv
+
+```bash
+uv venv
+
+# Activate the virtual environment
+# On Windows
+venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
+```
+
 ## Install dependencies
 
 ```bash
 pip install -r requirements.txt
+
+# OR 
+
+uv pip install -r requirements.txt
 ```
 
 ## Running the Scripts
@@ -35,17 +51,30 @@ pip install -r requirements.txt
 ### Preprocess the data
 
 ```bash
-python preprocess.py
+python src/preprocess.py
 ```
 
 ### Train the model
 
 ```bash
-python train.py
+python src/train.py
 ```
 
 ### Evaluate the model
 
 ```bash
-python evaluate.py
+python src/evaluate.py
 ```
+
+
+## Using DVC to run the Scripts
+
+```bash
+dvc repro # To reproduce all the steps for the ML model
+```
+
+```bash
+dvc repro preprocess # to run a specific stage
+```
+
+> [!IMPORTANT] To change the Parameters for the ML runs, edit the params.yaml, i.e, change model value to B, C or D.
